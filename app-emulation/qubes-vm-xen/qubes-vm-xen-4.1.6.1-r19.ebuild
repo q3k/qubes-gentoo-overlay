@@ -22,7 +22,7 @@ DEPEND="amd64? (
 	sys-power/iasl )
 	media-libs/libsdl"
 RDEPEND="${DEPEND}
-	app-emulation/xen-tools"
+	!!app-emulation/xen-tools"
 
 inherit python-single-r1
 
