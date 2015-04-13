@@ -1,0 +1,23 @@
+diff --git a/qmemman/Makefile b/qmemman/Makefile
+index 5747414..957e915 100644
+--- a/qmemman/Makefile
++++ b/qmemman/Makefile
+@@ -1,6 +1,7 @@
+ CC=gcc
+ CFLAGS=-Wall -Wextra -Werror -g -O3
+ SBINDIR ?= /usr/sbin
++UNITDIR ?= /usr/lib/systemd/system/
+ 
+ all:	meminfo-writer
+ 
+@@ -17,8 +18,8 @@ ifeq (1,${DEBIANBUILD})
+ 	install -d $(DESTDIR)/lib/systemd/system/
+ 	install -m 0644 qubes-meminfo-writer.service $(DESTDIR)/lib/systemd/system/
+ else
+-	install -d $(DESTDIR)/usr/lib/systemd/system/
+-	install qubes-meminfo-writer*service $(DESTDIR)/usr/lib/systemd/system/
++	install -d $(DESTDIR)$(UNITDIR)
++	install qubes-meminfo-writer*service $(DESTDIR)$(UNITDIR)
+ endif
+ clean:
+ 	rm -f meminfo-writer xenstore-watch *.o
