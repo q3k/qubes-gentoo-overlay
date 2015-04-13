@@ -1,0 +1,26 @@
+diff --git a/u2mfn/Makefile b/u2mfn/Makefile
+index 9f08dcc..b6e170c 100644
+--- a/u2mfn/Makefile
++++ b/u2mfn/Makefile
+@@ -24,7 +24,7 @@ CFLAGS=-g -Wall
+ all: libu2mfn.so
+ 
+ libu2mfn.so : u2mfnlib.o
+-	gcc -shared -o libu2mfn.so u2mfnlib.o
++	gcc -shared -o libu2mfn.so u2mfnlib.o -Wl,-soname,libu2mfn.so.0
+ u2mfnlib.o: u2mfnlib.c
+ 	gcc -fPIC -Wall -g -c u2mfnlib.c
+ clean:
+diff --git a/vchan/Makefile.linux b/vchan/Makefile.linux
+index b99706d..ad8f6ec 100644
+--- a/vchan/Makefile.linux
++++ b/vchan/Makefile.linux
+@@ -24,7 +24,7 @@ CFLAGS=-g -Wall -Wextra -Werror -fPIC -O2
+ all: libvchan.so
+ 
+ libvchan.so : init.o io.o
+-	gcc -shared -o libvchan.so -lxenctrl -lxenstore init.o io.o -L ../u2mfn -lu2mfn
++	gcc -shared -o libvchan.so -lxenctrl -lxenstore init.o io.o -L ../u2mfn -lu2mfn -Wl,-soname,libvchan.so.0
+ node:	node.o libvchan.so
+ 	gcc -g -o node node.o -L. -lvchan
+ node-select:	node-select.o libvchan.so
